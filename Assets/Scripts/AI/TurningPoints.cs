@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class TurningPoints : MonoBehaviour
 {
-    const float DISTANCE_TO_TILE = 1f;
+    const float DISTANCE_FROM_TILE = 1f;
 
     public List<Vector2> availableDirections { get; private set; }
+
     LayerMask MazeWalls => LayerMask.GetMask("Walls");
     
     void Start ()
@@ -24,7 +25,7 @@ public class TurningPoints : MonoBehaviour
         RaycastHit2D raycast = Physics2D.Raycast(
             transform.position, 
             direction, 
-            DISTANCE_TO_TILE, 
+            DISTANCE_FROM_TILE, 
             MazeWalls
         );
 

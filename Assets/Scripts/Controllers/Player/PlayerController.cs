@@ -1,11 +1,9 @@
 public class PlayerController
 {
-    const float MOVEMENT_SPEED = 6f;
-    const float SPEED_MULTIPLIER = 1.2f;
-
     PlayerView view;
     IPlayerModel model;
     IGhostModel[] ghostModels;
+    PacmanDatabase database;
 
     public PlayerController (PlayerView view, IPlayerModel model, IGhostModel[] ghostModels)
     {
@@ -13,6 +11,7 @@ public class PlayerController
         this.model = model;
         this.ghostModels = ghostModels;
 
+        database = view.Database;
         model.OnPlayerEaten += HandlePlayerEaten;
 
         foreach (IGhostModel ghostModel in ghostModels)
@@ -26,9 +25,8 @@ public class PlayerController
 
     public void Initialize()
     {
-        view.Speed = MOVEMENT_SPEED;
-        view.Multiplier = SPEED_MULTIPLIER;
-
+        model.Lives = database.initialLives;
+        
         ShowPlayer(true);
     }
 

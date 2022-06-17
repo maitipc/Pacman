@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < ghosts.Length; i++)
         {
             ghostModels[i] = new GhostModel();
-            ghostModels[i].Initialize();
             GhostController controller = new GhostController(ghosts[i], ghostModels[i]);
             controller.Initialize(player, insideHomePosition, outsideHomePosition);
         }

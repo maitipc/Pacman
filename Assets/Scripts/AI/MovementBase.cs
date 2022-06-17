@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class MovementBase : MonoBehaviour
 {
-    const float DISTANCE_TO_TILE = 1.2f;
+    const float DISTANCE_FROM_TILE = 1.2f;
 
     public float Speed {get; set;}
     public float Multiplier {get; set;}
@@ -56,7 +56,7 @@ public abstract class MovementBase : MonoBehaviour
         RaycastHit2D raycast = Physics2D.Raycast(
             transform.position, 
             direction, 
-            DISTANCE_TO_TILE, 
+            DISTANCE_FROM_TILE, 
             MazeWalls
         );
         

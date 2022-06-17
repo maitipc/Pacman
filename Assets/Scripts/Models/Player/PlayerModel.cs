@@ -2,22 +2,14 @@ using System;
 
 public class PlayerModel : IPlayerModel
 {
-    const int INITIAL_LIVES = 4;
-
     public event Action OnPlayerEaten;
     public event Action<int> OnIncreaseScore;
 
-    public int Lives {get; private set;}
+    public int Lives {get; set;}
     public int Score {get; private set;}
 
     public PlayerModel ()
     {
-        Initialize();
-    }
-
-    public void Initialize()
-    {
-        Lives = INITIAL_LIVES;
         Score = 0;
     }
 

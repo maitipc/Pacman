@@ -2,10 +2,16 @@ using UnityEngine;
 
 public class PlayerView : MovementBase
 {
+    [SerializeField] PacmanDatabase database;
+
+    public PacmanDatabase Database => database;
+
     void Start()
     {
         InitialPosition = this.transform.position;
         InitialDirection = Vector2.right;
+        Speed = Database.movementSpeed;
+        Multiplier = Database.speedMultiplier;
 
         Reset();
     }

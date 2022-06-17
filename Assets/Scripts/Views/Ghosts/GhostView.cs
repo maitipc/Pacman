@@ -5,18 +5,15 @@ using UnityEngine;
 
 public class GhostView : GhostBehaviour
 {
-    const int SCATTER_DURATION = 10;
-
     public event Action OnPacmanCollision;
     public event Action OnScatterStateEnd;
 
     [SerializeField] GameObject defaultState;
     [SerializeField] GameObject blueState;
-    [SerializeField] GhostName ghostName;
     [SerializeField] GameObject eye;
-    [SerializeField] float atHomeDuration;
+    [SerializeField] GhostsDatabase database;
 
-    public GhostName Name => ghostName;
+    public GhostsDatabase Database => database;
     public GameObject Target { get; set; }
     int scatterDuration { get; set; }
 
@@ -24,6 +21,8 @@ public class GhostView : GhostBehaviour
     {
         InitialPosition = this.transform.position;
         InitialDirection = Vector2.right;
+        Speed = database.MovementSpeed;
+        Multiplier = database.SpeedMultiplier;
 
         Reset();
     }
@@ -65,16 +64,16 @@ public class GhostView : GhostBehaviour
             availableDirections = 
                 collider.gameObject.GetComponent<TurningPoints>().availableDirections;
 
-            SetMovementDecision(Target.transform, ghostName);
+            SetMovementDecision(Target.transform, database.Name);
         }
 
         if (collider.gameObject == OutHome.gameObject && CurrentState == GhostState.Dead)
-            StartCoroutine(Respawn(atHomeDuration));
+            StartCoroutine(Respawn(database.atHomeDuration));
     }
 
     IEnumerator ScatterCountdown ()
     {
-        scatterDuration = SCATTER_DURATION;
+        scatterDuration = database.ScatterDuration;
         
         while (scatterDuration > 0)
         {
@@ -90,7 +89,7 @@ public class GhostView : GhostBehaviour
         defaultState.SetActive(!isVulnerable);
         eye.SetActive(!isVulnerable);
         blueState.SetActive(isVulnerable);
-        SetMovementDecision(Target.transform, ghostName);
+        SetMovementDecision(Target.transform, database.Name);
     }
 
     void DeadGhost()
@@ -98,6 +97,6 @@ public class GhostView : GhostBehaviour
         defaultState.SetActive(false);
         eye.SetActive(true);
         blueState.SetActive(false);
-        SetMovementDecision(AtHome, ghostName);
+        SetMovementDecision(AtHome, database.Name);
     }
 }

@@ -6,9 +6,8 @@ public interface IGhostModel
     event Action<IGhostModel> OnGhostCollision;
     event Action<GhostState> OnChangeState;
 
-    GhostName GhostName { get; set; }
     GhostState CurrentState { get; set; }
-    int Points { get; }
+    int Points { get; set; }
     
     void GhostEaten ();
     void GhostCollide();
