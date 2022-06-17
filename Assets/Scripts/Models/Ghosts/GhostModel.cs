@@ -3,6 +3,7 @@ using System;
 public class GhostModel : IGhostModel
 {
     public event Action<int> OnGhostEaten;
+    public event Action OnPlayerEaten;
     public event Action<IGhostModel> OnGhostCollision;
     public event Action<GhostState> OnChangeState;
 
@@ -21,6 +22,26 @@ public class GhostModel : IGhostModel
     public void GhostCollide()
     {
         OnGhostCollision?.Invoke(this);
+        CheckState();
+    }
+
+    void CheckState()
+    {
+        switch (CurrentState)
+        {
+            case GhostState.Scatter:
+                OnPlayerEaten?.Invoke();
+                break;
+            case GhostState.Dead:
+                break;
+            case GhostState.Vulnerable:
+                GhostEaten();
+                break;
+            case GhostState.Chase:
+                OnPlayerEaten?.Invoke();
+                ChangeState(GhostState.Scatter);
+                break;
+        }
     }
 
     public void ChangeState(GhostState state)

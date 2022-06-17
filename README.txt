@@ -1,4 +1,8 @@
-:: PACMAN - Overview :: - Maiti Puertas Crucelli
+:: PACMAN - Overview ::
+
+GameManager:
+Works as a single-entry point, initializing the player, the ghosts and the UI.
+Manages the score and the lives.
 
 In this Pacman version, the ghosts have 4 states:
 

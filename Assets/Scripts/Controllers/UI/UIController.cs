@@ -4,31 +4,22 @@ using UnityEngine.UI;
 
 public class UIController
 {   
-    IPlayerModel playerModel;
     UIView view;
 
-    public void Setup (
-        UIView view,
-        IPlayerModel playerModel
-    )
+    public void Setup (UIView view, int lives)
     {
         this.view = view;
-        this.playerModel = playerModel;
-            
-        playerModel.OnPlayerEaten += HandlePlayerEaten;
-        playerModel.OnIncreaseScore += UpdateScore;
 
-        view.InitLives(playerModel.Lives);
-        UpdateScore(playerModel.Score);
+        view.InitLives(lives);
     }
 
-    void UpdateScore(int score) => view.SetScore(score);
+    public void UpdateScore(int score) => view.SetScore(score);
 
-    void HandlePlayerEaten()
+    public void HandlePlayerEaten(int lives)
     {
-        view.SetLives(playerModel.Lives);
+        view.SetLives(lives);
 
-        if (playerModel.Lives <= 0)
+        if (lives <= 0)
             HandleGameOver();
     }
 

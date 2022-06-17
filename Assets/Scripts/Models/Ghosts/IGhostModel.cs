@@ -3,6 +3,7 @@ using System;
 public interface IGhostModel
 {
     event Action<int> OnGhostEaten;
+    event Action OnPlayerEaten;
     event Action<IGhostModel> OnGhostCollision;
     event Action<GhostState> OnChangeState;
 

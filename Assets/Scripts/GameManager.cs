@@ -10,10 +10,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform insideHomePosition;
     [SerializeField] Transform outsideHomePosition;
 
-    PlayerModel playerModel;
     GhostModel[] ghostModels;
     PelletView[] pellets;
     UIController uiController;
+    int score { get; set;}
+    int lives {get; set;}
 
     void Start()
     {
@@ -22,14 +23,21 @@ public class GameManager : MonoBehaviour
 
     void InitializeGame()
     {
+        score = 0;
+        lives = player.Database.initialLives;
+
         InitializeGhosts();
         InitializePlayer();
         InitializePellets();
 
         uiController = new UIController();
-        uiController.Setup(uiView, playerModel);
+        uiController.Setup(uiView, lives);
 
-        playerModel.OnPlayerEaten += HandlePlayerEaten;
+        foreach (IGhostModel ghostModel in ghostModels)
+        {
+            ghostModel.OnPlayerEaten += HandlePlayerEaten;
+            ghostModel.OnGhostEaten += IncreaseScore;
+        }
     }
 
     void Reset()
@@ -60,23 +68,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void InitializePlayer()
-    {
-        playerModel = new PlayerModel();
-        PlayerController controller = new PlayerController(player, playerModel, ghostModels);
-    }
+    void InitializePlayer() => player.gameObject.SetActive(true);
 
     void HandlePlayerEaten()
     {
-        if (playerModel.Lives > 0)
+        player.gameObject.SetActive(false);
+        lives--;
+        uiController.HandlePlayerEaten(lives);
+
+        if (lives > 0)
+        {
             Invoke(nameof(Reset), 2f);
-        else
-            player.gameObject.SetActive(false);
+            player.Reset();
+        }
+    }
+
+    public void IncreaseScore (int score) 
+    {
+        this.score += score;
+        uiController.UpdateScore(this.score);
     }
 
     void HandlePelletEaten(int points, bool isPowerPellet, int effectDuration)
     {
-        playerModel.IncreaseScore(points);
+        IncreaseScore(points);
 
         if (isPowerPellet)
         {
