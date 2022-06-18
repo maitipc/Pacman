@@ -294,6 +294,7 @@ MonoBehaviour:
   - {fileID: 1907935020}
   - {fileID: 924040035}
   uiView: {fileID: 354842214}
+  gameData: {fileID: 11400000, guid: f4db9664d344cac479c3e5a7d8b601f8, type: 2}
   pelletsArea: {fileID: 1775886695}
   insideHomePosition: {fileID: 1342291761}
   outsideHomePosition: {fileID: 1831253112}
@@ -392,8 +393,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreTxt: {fileID: 153019732}
-  gameOver: {fileID: 1297877176}
-  winner: {fileID: 1371692343}
+  gameOverBanner: {fileID: 1297877176}
+  winnerBanner: {fileID: 1371692343}
+  lifePrefab: {fileID: 1262111890754360905, guid: 64caf01257b2a564dba91fcea78f7c9c, type: 3}
   livesArea: {fileID: 1090223175}
 --- !u!1 &519420028
 GameObject:
@@ -12471,6 +12473,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 73432798482040092, guid: 6b34725e3fa23e74399875985daaef19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496516309891324955, guid: 6b34725e3fa23e74399875985daaef19, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496516309891324955, guid: 6b34725e3fa23e74399875985daaef19, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

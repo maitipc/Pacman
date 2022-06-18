@@ -10,7 +10,7 @@ public abstract class MovementBase : MonoBehaviour
     protected Vector2 Direction {get; private set;}
     protected Vector3 InitialPosition {get; set;}
     protected Vector2 InitialDirection {get; set;} 
-    protected GameObject character => this.gameObject;  
+    protected GameObject character => this.gameObject; //rever essa variavel
     protected new Rigidbody2D rigidbody => character.GetComponent<Rigidbody2D>();
     
     Vector2 nextDirection;

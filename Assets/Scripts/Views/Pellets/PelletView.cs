@@ -9,16 +9,19 @@ public class PelletView : MonoBehaviour
     [SerializeField] bool isPowerPellet;
 
     int effectDuration;
+    int pacmanLayer;
 
     void Awake()
     {
+        pacmanLayer = LayerMask.NameToLayer("Pacman");
+        
         if (isPowerPellet)
-            effectDuration = 8;
+            effectDuration = 8; //passar isso pro game config
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.layer == LayerMask.NameToLayer("Pacman"))
+        if (collider.gameObject.layer == pacmanLayer)
             EatPellet();
     }
 

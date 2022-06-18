@@ -9,7 +9,6 @@ public class UIController
     public void Setup (UIView view, int lives)
     {
         this.view = view;
-
         view.InitLives(lives);
     }
 
@@ -17,13 +16,13 @@ public class UIController
 
     public void HandlePlayerEaten(int lives)
     {
-        view.SetLives(lives);
-
         if (lives <= 0)
             HandleGameOver();
+        
+        view.SetLives(lives);
     }
 
-    void HandleGameOver() => view.GameOver.SetActive(true);
+    void HandleGameOver() => view.GameOverBanner.SetActive(true);
 
-    public void HandleWinner() => view.Winner.SetActive(true);
+    public void HandleWinner() => view.WinnerBanner.SetActive(true);
 }

@@ -4,16 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class UIView : MonoBehaviour
 {
-    const string LIVES_PATH = "Prefabs/Life";
-
     [SerializeField] TextMeshProUGUI scoreTxt;
-    [SerializeField] GameObject gameOver;
-    [SerializeField] GameObject winner;
+    [SerializeField] GameObject gameOverBanner;
+    [SerializeField] GameObject winnerBanner;
+    [SerializeField] GameObject lifePrefab;
     [SerializeField] Transform livesArea;
 
-    public GameObject GameOver => gameOver;
-    public GameObject Winner => winner;
-    public Transform LivesArea => livesArea;
+    public GameObject GameOverBanner => gameOverBanner;
+    public GameObject WinnerBanner => winnerBanner;
 
     public void SetScore(int score) => scoreTxt.text = score.ToString();
 
@@ -21,7 +19,6 @@ public class UIView : MonoBehaviour
 
     public void InitLives (int lives)
     {
-        Object lifePrefab = Resources.Load(LIVES_PATH);
         livesObjects = new GameObject[lives];
 
         for (int i = 0; i < lives; i++)
@@ -39,9 +36,11 @@ public class UIView : MonoBehaviour
         }
     }
 
+    //colocar essa verificação de restart no game manager
+    //a condição vem o game manager, o input vem da ui e o retorno vem do game manager
     void Update()
     {
-        if (gameOver.gameObject.activeSelf || winner.gameObject.activeSelf)
+        if (gameOverBanner.gameObject.activeSelf || winnerBanner.gameObject.activeSelf)
         {
             if (Input.anyKeyDown)
             {

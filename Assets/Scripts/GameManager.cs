@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlayerView player;
     [SerializeField] GhostView[] ghosts;
     [SerializeField] UIView uiView;
+    [SerializeField] GameDatabase gameData;
     [SerializeField] Transform pelletsArea;
     [SerializeField] Transform insideHomePosition;
     [SerializeField] Transform outsideHomePosition;
@@ -24,7 +25,7 @@ public class GameManager : MonoBehaviour
     void InitializeGame()
     {
         score = 0;
-        lives = player.Database.initialLives;
+        lives = gameData.initialLives;
 
         InitializeGhosts();
         InitializePlayer();
@@ -75,10 +76,11 @@ public class GameManager : MonoBehaviour
         player.gameObject.SetActive(false);
         lives--;
         uiController.HandlePlayerEaten(lives);
+        ChangeGhostState(GhostState.Scatter);
 
         if (lives > 0)
         {
-            Invoke(nameof(Reset), 2f);
+            Invoke(nameof(Reset), 2f); //verificar se isso usa reflection, e ver se compensa trocar pra corrotina
             player.Reset();
         }
     }
@@ -105,12 +107,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Countdown(int effectDuration)
     {
-        while (effectDuration > 0)
-        {
-            yield return new WaitForSeconds(1);
-            effectDuration--;
-        }
-
+        yield return new WaitForSeconds(effectDuration);
         ChangeGhostState(GhostState.Chase);
     }
 
@@ -135,5 +132,26 @@ public class GameManager : MonoBehaviour
     {
         player.gameObject.SetActive(false);
         uiController.HandleWinner();
+    }
+
+    void DisposeGhosts()
+    {
+        foreach (IGhostModel ghostModel in ghostModels)
+        {
+            ghostModel.OnPlayerEaten -= HandlePlayerEaten;
+            ghostModel.OnGhostEaten -= IncreaseScore;
+        }
+    }
+
+    void DisposePellets()
+    {
+        foreach (PelletView pellet in pellets)
+            pellet.OnPelletEaten -= HandlePelletEaten;
+    }
+
+    void OnDestroy() 
+    {
+        DisposeGhosts();
+        DisposePellets();
     }
 }
