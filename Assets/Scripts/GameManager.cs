@@ -86,14 +86,14 @@ public class GameManager : MonoBehaviour
         uiController.UpdateScore(this.score);
     }
 
-    void HandlePelletEaten(int points, bool isPowerPellet, int effectDuration)
+    void HandlePelletEaten(int points, bool isPowerPellet)
     {
         IncreaseScore(points);
 
         if (isPowerPellet)
         {
             ChangeGhostState(GhostState.Vulnerable);
-            StartCoroutine(Countdown(effectDuration));
+            StartCoroutine(Countdown(gameData.powerPelletEffectDuration));
         }
 
         if (!IsRemainingPellets())

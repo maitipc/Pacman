@@ -3,20 +3,16 @@ using UnityEngine;
 
 public class PelletView : MonoBehaviour
 {
-    public event Action<int, bool, int> OnPelletEaten;
+    public event Action<int, bool> OnPelletEaten;
     
     [SerializeField] int points;
     [SerializeField] bool isPowerPellet;
 
-    int effectDuration;
     int pacmanLayer;
 
     void Awake()
     {
         pacmanLayer = LayerMask.NameToLayer("Pacman");
-        
-        if (isPowerPellet)
-            effectDuration = 8; //passar isso pro game config
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -28,6 +24,6 @@ public class PelletView : MonoBehaviour
     void EatPellet()
     {
         this.gameObject.SetActive(false);
-        OnPelletEaten?.Invoke(points, isPowerPellet, effectDuration);
+        OnPelletEaten?.Invoke(points, isPowerPellet);
     }
 }
