@@ -488,6 +488,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1651455874}
     m_Modifications:
+    - target: {fileID: 1182533727202859259, guid: 6dcffca5aaf388d4ba1b2cdea3bd19be, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2844789794320361634, guid: 6dcffca5aaf388d4ba1b2cdea3bd19be, type: 3}
       propertyPath: database
       value: 
@@ -495,6 +499,10 @@ PrefabInstance:
     - target: {fileID: 8747449841602544122, guid: 6dcffca5aaf388d4ba1b2cdea3bd19be, type: 3}
       propertyPath: m_Name
       value: Ghost_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8747449841602544122, guid: 6dcffca5aaf388d4ba1b2cdea3bd19be, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8747449841602544124, guid: 6dcffca5aaf388d4ba1b2cdea3bd19be, type: 3}
       propertyPath: m_RootOrder
@@ -1363,6 +1371,10 @@ PrefabInstance:
       propertyPath: database
       value: 
       objectReference: {fileID: 11400000, guid: 74ebcb44696db9e4d8176936d3bb101c, type: 2}
+    - target: {fileID: 2501066790744034651, guid: 351d5f35730ee2f47aae05084f99970a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3678278482018501614, guid: 351d5f35730ee2f47aae05084f99970a, type: 3}
       propertyPath: m_Color.b
       value: 0.87027705
@@ -1378,6 +1390,10 @@ PrefabInstance:
     - target: {fileID: 5456543737889887322, guid: 351d5f35730ee2f47aae05084f99970a, type: 3}
       propertyPath: m_Name
       value: Ghost_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5456543737889887322, guid: 351d5f35730ee2f47aae05084f99970a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5456543737889887324, guid: 351d5f35730ee2f47aae05084f99970a, type: 3}
       propertyPath: m_RootOrder
@@ -11506,7 +11522,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1831253112}
   - component: {fileID: 1831253113}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: OutsideHome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12415,21 +12431,9 @@ PrefabInstance:
       propertyPath: database
       value: 
       objectReference: {fileID: 11400000, guid: b910c84b4af04794f8f504c9217432d8, type: 2}
-    - target: {fileID: -2370172361233535934, guid: 6b34725e3fa23e74399875985daaef19, type: 3}
-      propertyPath: InitialState
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -2370172361233535934, guid: 6b34725e3fa23e74399875985daaef19, type: 3}
-      propertyPath: atHomeDuration
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 73432798482040090, guid: 6b34725e3fa23e74399875985daaef19, type: 3}
       propertyPath: m_Name
       value: Ghost
-      objectReference: {fileID: 0}
-    - target: {fileID: 73432798482040090, guid: 6b34725e3fa23e74399875985daaef19, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 73432798482040092, guid: 6b34725e3fa23e74399875985daaef19, type: 3}
       propertyPath: m_RootOrder
@@ -12475,8 +12479,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7496516309891324955, guid: 6b34725e3fa23e74399875985daaef19, type: 3}
-      propertyPath: m_Enabled
+    - target: {fileID: 1401537048546099578, guid: 6b34725e3fa23e74399875985daaef19, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1994920714351768539, guid: 6b34725e3fa23e74399875985daaef19, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7496516309891324955, guid: 6b34725e3fa23e74399875985daaef19, type: 3}
@@ -12650,6 +12658,10 @@ PrefabInstance:
       propertyPath: database
       value: 
       objectReference: {fileID: 11400000, guid: d324bac1ebd27a245a72149c45e52d65, type: 2}
+    - target: {fileID: 3612006074874065973, guid: 99e0915360eb94b46ba997b5d1583f57, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6569756812822179122, guid: 99e0915360eb94b46ba997b5d1583f57, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -12697,6 +12709,10 @@ PrefabInstance:
     - target: {fileID: 6569756812822179124, guid: 99e0915360eb94b46ba997b5d1583f57, type: 3}
       propertyPath: m_Name
       value: Ghost_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6569756812822179124, guid: 99e0915360eb94b46ba997b5d1583f57, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99e0915360eb94b46ba997b5d1583f57, type: 3}

@@ -36,4 +36,12 @@ public class GhostController
     void HandleGhostOutHome () => model.ChangeState(GhostState.Chase);
     void HandleOnScatterEnd () => model.ChangeState(GhostState.Chase);
     void HandleChangeState (GhostState state) => view.ChangeState(state);
+
+    void OnDestroy() 
+    {
+        model.OnChangeState -= HandleChangeState;
+        view.OnPacmanCollision -= HandleGhostCollision;
+        view.OnGhostRespawned -= HandleGhostOutHome;
+        view.OnScatterStateEnd -= HandleOnScatterEnd;
+    }
 }

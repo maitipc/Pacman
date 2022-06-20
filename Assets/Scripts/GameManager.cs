@@ -41,11 +41,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Reset()
-    {
-        player.gameObject.SetActive(true);
-    }
-
     void InitializePellets()
     {
         pellets = pelletsArea.GetComponentsInChildren<PelletView>();
@@ -80,7 +75,7 @@ public class GameManager : MonoBehaviour
 
         if (lives > 0)
         {
-            Invoke(nameof(Reset), 2f); //verificar se isso usa reflection, e ver se compensa trocar pra corrotina
+            Invoke(nameof(InitializePlayer), 2f);
             player.Reset();
         }
     }

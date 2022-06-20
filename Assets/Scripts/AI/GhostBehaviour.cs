@@ -13,53 +13,56 @@ public abstract class GhostBehaviour : MovementBase
     public Transform AtHome { get; set; }
     public Transform OutHome { get; set; }
 
+    ChaseBehaviour chaseBehaviour;
+    ScatterBehaviour scatterBehaviour;
+    VulnerableBehaviour vulnerableBehaviour;
+    DeadBehaviour deadBehaviour;
+
+    void Awake() 
+    {
+        chaseBehaviour = new ChaseBehaviour();
+        scatterBehaviour = new ScatterBehaviour();
+        vulnerableBehaviour = new VulnerableBehaviour();
+        deadBehaviour = new DeadBehaviour();
+    }
+
     protected void SetMovementDecision(Transform target, GhostName ghostName)
     {
-        ChaseBehaviour chaseBehaviour = new ChaseBehaviour();
-        ScatterBehaviour scatterBehaviour = new ScatterBehaviour();
-        VulnerableBehaviour vulnerableBehaviour = new VulnerableBehaviour();
-        DeadBehaviour deadBehaviour = new DeadBehaviour();
+        Vector2 newDirection = Vector2.zero;
 
         switch (CurrentState)
         {
             case GhostState.Chase:
-                SetDirection(
-                    chaseBehaviour.Chase(character, target, ghostName, availableDirections)
-                );
+                newDirection = chaseBehaviour.Chase(this.gameObject, target, ghostName, availableDirections);
                 Multiplier = chaseBehaviour.Multiplier;
                 break;
             case GhostState.Scatter:
-                SetDirection(
-                    scatterBehaviour.GenerateDirection(availableDirections)
-                );
+                newDirection = scatterBehaviour.GenerateDirection(availableDirections);
                 break;
             case GhostState.Vulnerable:
-                SetDirection(
-                    vulnerableBehaviour.Vulnerable(character, target, availableDirections)
-                );
+                newDirection = vulnerableBehaviour.Vulnerable(this.gameObject, target, availableDirections);
                 Multiplier = vulnerableBehaviour.Multiplier;
                 break;
             case GhostState.Dead:
-                SetDirection(deadBehaviour.GoToHome(character, OutHome, availableDirections));
+                newDirection = deadBehaviour.GoToHome(this.gameObject, OutHome, availableDirections);
                 Multiplier = deadBehaviour.Multiplier;    
                 break;
             default:
                 break;
         }
+
+        SetDirection(newDirection);
     }
 
     protected IEnumerator Respawn (float atHomeDuration)
     {
-        character.transform.position = AtHome.position;
+        transform.position = AtHome.position;
 
-        while (atHomeDuration > 0)
-        {
-            yield return new WaitForSeconds(1);
-            atHomeDuration--;
-        }
+        yield return new WaitForSeconds(atHomeDuration);
         
         OnGhostRespawned?.Invoke();
-        character.transform.position = OutHome.position;
+
+        transform.position = OutHome.position;
         SetDirection(SetOutHomeDirection());
     }
 

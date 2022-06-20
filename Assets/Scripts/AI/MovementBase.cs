@@ -10,8 +10,7 @@ public abstract class MovementBase : MonoBehaviour
     protected Vector2 Direction {get; private set;}
     protected Vector3 InitialPosition {get; set;}
     protected Vector2 InitialDirection {get; set;} 
-    protected GameObject character => this.gameObject; //rever essa variavel
-    protected new Rigidbody2D rigidbody => character.GetComponent<Rigidbody2D>();
+    protected new Rigidbody2D rigidbody => GetComponent<Rigidbody2D>();
     
     Vector2 nextDirection;
     LayerMask MazeWalls => LayerMask.GetMask("Walls");
@@ -20,7 +19,7 @@ public abstract class MovementBase : MonoBehaviour
     {
         Direction = InitialDirection;
         nextDirection = Vector2.zero;
-        character.transform.position = InitialPosition;
+        transform.position = InitialPosition;
         rigidbody.isKinematic = false;
     }
 

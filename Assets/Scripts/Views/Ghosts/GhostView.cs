@@ -13,24 +13,27 @@ public class GhostView : GhostBehaviour
     [SerializeField] GameObject eye;
     [SerializeField] GhostsDatabase database;
 
+    int pacmanLayer;
+    int turningPointLayer;
+    int outsideHomeLayer;
+
     public GhostsDatabase Database => database;
     public GameObject Target { get; set; }
-    int scatterDuration { get; set; }
 
     void Start()
     {
+        pacmanLayer = LayerMask.NameToLayer("Pacman");
+        turningPointLayer = LayerMask.NameToLayer("TurningPoint");
+        outsideHomeLayer = LayerMask.NameToLayer("OutsideHome");
+
         InitialPosition = this.transform.position;
         InitialDirection = Vector2.right;
         Speed = database.MovementSpeed;
         Multiplier = database.SpeedMultiplier;
 
-        Reset();
-    }
+        availableDirections = new List<Vector2>();
 
-    void OnCollisionEnter2D (Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Pacman"))
-            OnPacmanCollision?.Invoke();
+        Reset();
     }
 
     public void ChangeState(GhostState state)
@@ -55,32 +58,32 @@ public class GhostView : GhostBehaviour
         }
     }
 
+    void OnCollisionEnter2D (Collision2D collision)
+    {
+        if (collision.gameObject.layer == pacmanLayer)
+            OnPacmanCollision?.Invoke();
+    }
+
     void OnTriggerEnter2D(Collider2D collider)
     {
-        availableDirections = new List<Vector2>();
-
-        if (collider.gameObject.layer == LayerMask.NameToLayer("TurningPoint"))
+        if (collider.gameObject.layer == turningPointLayer)
         {
             availableDirections = 
                 collider.gameObject.GetComponent<TurningPoints>().availableDirections;
 
             SetMovementDecision(Target.transform, database.Name);
         }
-
-        if (collider.gameObject == OutHome.gameObject && CurrentState == GhostState.Dead)
+        
+        if (collider.gameObject.layer == outsideHomeLayer && CurrentState == GhostState.Dead)
+        {
+            availableDirections = new List<Vector2>();
             StartCoroutine(Respawn(database.atHomeDuration));
+        }
     }
 
     IEnumerator ScatterCountdown ()
     {
-        scatterDuration = database.ScatterDuration;
-        
-        while (scatterDuration > 0)
-        {
-            yield return new WaitForSeconds(1);
-            scatterDuration--;
-        }
-
+        yield return new WaitForSeconds(database.ScatterDuration);
         OnScatterStateEnd?.Invoke();
     }
 
