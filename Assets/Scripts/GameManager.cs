@@ -75,15 +75,15 @@ public class GameManager : MonoBehaviour
 
         if (lives > 0)
         {
-            Invoke(nameof(InitializePlayer), 2f);
+            StartCoroutine(ResetPlayer());
             player.Reset();
         }
     }
 
-    public void IncreaseScore (int score) 
+    IEnumerator ResetPlayer()
     {
-        this.score += score;
-        uiController.UpdateScore(this.score);
+        yield return new WaitForSeconds(2f);
+        InitializePlayer();
     }
 
     void HandlePelletEaten(int points, bool isPowerPellet)
@@ -98,6 +98,12 @@ public class GameManager : MonoBehaviour
 
         if (!IsRemainingPellets())
             ShowWinner();
+    }
+
+    void IncreaseScore (int score) 
+    {
+        this.score += score;
+        uiController.UpdateScore(this.score);
     }
 
     IEnumerator Countdown(int effectDuration)
@@ -126,6 +132,7 @@ public class GameManager : MonoBehaviour
     void ShowWinner()
     {
         player.gameObject.SetActive(false);
+        ChangeGhostState(GhostState.Scatter);
         uiController.HandleWinner();
     }
 

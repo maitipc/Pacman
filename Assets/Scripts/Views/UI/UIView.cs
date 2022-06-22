@@ -36,8 +36,6 @@ public class UIView : MonoBehaviour
         }
     }
 
-    //colocar essa verificação de restart no game manager
-    //a condição vem o game manager, o input vem da ui e o retorno vem do game manager
     void Update()
     {
         if (gameOverBanner.gameObject.activeSelf || winnerBanner.gameObject.activeSelf)
