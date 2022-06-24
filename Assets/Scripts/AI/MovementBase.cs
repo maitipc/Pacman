@@ -4,9 +4,8 @@ public abstract class MovementBase : MonoBehaviour
 {
     const float DISTANCE_FROM_TILE = 1.2f;
 
-    public float Speed {get; set;}
-    public float Multiplier {get; set;}
-    
+    protected float Speed {get; set;}
+    protected float Multiplier {get; set;}
     protected Vector2 Direction {get; private set;}
     protected Vector3 InitialPosition {get; set;}
     protected Vector2 InitialDirection {get; set;} 

@@ -6,7 +6,6 @@ using UnityEngine;
 public abstract class GhostBehaviour : MovementBase
 {
     public event Action OnGhostRespawned;
-    public event Action OnGhostAtHome;
 
     protected List<Vector2> availableDirections;
     public GhostState CurrentState { get; set; }
@@ -45,7 +44,7 @@ public abstract class GhostBehaviour : MovementBase
                 break;
             case GhostState.Dead:
                 newDirection = deadBehaviour.GoToHome(this.gameObject, OutHome, availableDirections);
-                Multiplier = deadBehaviour.Multiplier;    
+                Multiplier = deadBehaviour.Multiplier;
                 break;
             default:
                 break;

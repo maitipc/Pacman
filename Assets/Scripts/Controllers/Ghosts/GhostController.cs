@@ -32,7 +32,7 @@ public class GhostController
         view.gameObject.SetActive(true);
     }
 
-    void HandleGhostCollision () => model.GhostCollide();
+    void HandleGhostCollision () => model.CheckState();
     void HandleGhostOutHome () => model.ChangeState(GhostState.Chase);
     void HandleOnScatterEnd () => model.ChangeState(GhostState.Chase);
     void HandleChangeState (GhostState state) => view.ChangeState(state);

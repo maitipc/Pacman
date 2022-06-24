@@ -13,9 +13,9 @@ public class GhostView : GhostBehaviour
     [SerializeField] GameObject eye;
     [SerializeField] GhostsDatabase database;
 
-    int pacmanLayer;
-    int turningPointLayer;
-    int outsideHomeLayer;
+    int pacmanLayer { get; set; }
+    int turningPointLayer { get; set; }
+    int outsideHomeLayer { get; set; }
 
     public GhostsDatabase Database => database;
     public GameObject Target { get; set; }

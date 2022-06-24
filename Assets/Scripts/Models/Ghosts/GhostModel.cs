@@ -4,7 +4,6 @@ public class GhostModel : IGhostModel
 {
     public event Action<int> OnGhostEaten;
     public event Action OnPlayerEaten;
-    public event Action<IGhostModel> OnGhostCollision;
     public event Action<GhostState> OnChangeState;
 
     public GhostState CurrentState { get; set; }
@@ -19,13 +18,7 @@ public class GhostModel : IGhostModel
         ChangeState(GhostState.Dead);
     }
 
-    public void GhostCollide()
-    {
-        OnGhostCollision?.Invoke(this);
-        CheckState();
-    }
-
-    void CheckState()
+    public void CheckState()
     {
         switch (CurrentState)
         {

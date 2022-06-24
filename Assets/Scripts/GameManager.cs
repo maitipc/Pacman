@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
 
     void ChangeGhostState (GhostState state)
     {
-         foreach (GhostModel ghost in ghostModels)
+        foreach (GhostModel ghost in ghostModels)
             ghost.ChangeState(state);
     }
 

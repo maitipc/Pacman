@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DeadBehaviour
 {
-    public float Multiplier = 2f;
+    public float Multiplier = 4.5f;
 
     List<Vector2> availableDirections { get; set; }
     Transform target { get; set; }
